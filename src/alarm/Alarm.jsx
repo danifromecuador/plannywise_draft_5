@@ -1,8 +1,18 @@
+// src/alarm/Alarm.jsx
+
 import { useStore } from '../zustand/store'
 
 export const Alarm = () => {
-  const bears = useStore((state)=>state.bears)
+  const { currentDate } = useStore()
+
+  const updateTime = () => {
+    console.log(currentDate);
+  }
+
   return (
-    <h1>total amount of bears = {bears}</h1>    
+    <div className="alarm">
+      local hour is {currentDate.hour} : {currentDate.minute} : {currentDate.second}
+      <button onClick={updateTime} >Update Time</button>
+    </div>
   )
 }

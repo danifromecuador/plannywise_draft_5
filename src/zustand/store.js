@@ -1,7 +1,21 @@
+// src/zustand/store.js
+
 import { create } from 'zustand'
 
-export const useStore = create((set) => ({
-  bears: 20,
-  inc: () => set((state) => ({ bears: state.bears + 1 })),
-}))
+const getLocalTime = () => {
+  const currentDate = new Date()
 
+  return {
+    year: currentDate.getFullYear(),
+    month: currentDate.getMonth() + 1, // because January=0
+    dayOfMonth: currentDate.getDate(),
+    dayOfWeek: currentDate.getDay(),
+    hour: currentDate.getHours(),
+    minute: currentDate.getMinutes(),
+    second: currentDate.getSeconds()
+  }
+}
+
+export const useStore = create(() => ({
+  currentDate: getLocalTime(),
+}))
