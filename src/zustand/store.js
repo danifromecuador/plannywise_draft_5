@@ -16,6 +16,7 @@ const getLocalTime = () => {
   }
 }
 
-export const useStore = create(() => ({
+export const useStore = create((set) => ({
   currentDate: getLocalTime(),
+  updateCurrentDate: () => set({ currentDate: getLocalTime() }),
 }))
