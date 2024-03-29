@@ -1,0 +1,16 @@
+.alarm {
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items:baseline;
+}
+
+.alarm-h-m-s,
+.alarm-setted-interval-indicator,
+.alarm-next-time-indicator
+{
+  display: flex;
+  flex-direction: column;
+}

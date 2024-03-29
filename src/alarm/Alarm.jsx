@@ -1,6 +1,7 @@
 // src/alarm/Alarm.jsx
 import { useState, useEffect } from 'react'
 import { useStore } from '../zustand/store'
+import './Alarm.css'
 
 // time       is a variable type object from the store that shows the current local time
 // updateTime is a function from the store that updates the time (this function is called each second)
@@ -23,7 +24,7 @@ export const Alarm = () => {
   }
 
   const alarmWillSoundEach = () => {
-    if (time.s % minutesInterval == 0) setAlarmStatusMessage("alarm is playing")
+    if (time.s % minutesInterval == 0) setAlarmStatusMessage("playing")
     else setAlarmStatusMessage("wait")
   }
 
@@ -55,21 +56,23 @@ export const Alarm = () => {
   return (
     <div className="alarm">
       <div className="alarm-h-m-s">
-        {timeFormatted.h} : {timeFormatted.m} : {timeFormatted.s}
+        <span>{timeFormatted.h} : {timeFormatted.m} : {timeFormatted.s}</span>
+        <span>{alarmStatusMessage}</span>        
       </div>
       <div className="alarm-setted-interval-indicator">
-        The alarm will sound each {minutesInterval} minutes
-      </div>
-      <div className="alarm-next-time-indicator">
-        Next alarm will sound at {time.h} : {time.m} : {nextAlarmMessage}
+        <span>The alarm will sound</span>
+        <span>each {minutesInterval} minutes</span>
       </div>
       <div className="alarm-config">
         <details>
-          <summary>Change minutes interval</summary>
+          <summary>Change interval</summary>
           {[5, 10, 15, 20, 30, 60].map(i => <div key={i} onClick={() => setMinutesInterval(i)}>{i}</div>)}
         </details>
       </div>
-      <div>{alarmStatusMessage}</div>
+      <div className="alarm-next-time-indicator">
+        <span>Next alarm will sound</span>
+        <span>at {timeFormatted.h} : {timeFormatted.m} : {nextAlarmMessage}</span>        
+      </div>
     </div>
   )
 }
