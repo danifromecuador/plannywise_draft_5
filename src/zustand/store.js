@@ -17,5 +17,7 @@ const getTime = () => {
 
 export const useStore = create((set) => ({
   time: getTime(),
+  alarmInterval: 15,
   updateTime: () => set({ time: getTime() }),
+  updateAlarmInterval: (alarmInterval) => set({alarmInterval})  
 }))

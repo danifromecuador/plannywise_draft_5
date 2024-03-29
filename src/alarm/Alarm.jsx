@@ -8,11 +8,12 @@ import './Alarm.css'
 //            other way the time will be static
 // h, m, s    are the keys of the time object that represent the hours, minutes, and seconds 
 export const Alarm = () => {
-  const { time, updateTime } = useStore()
+  const { time, updateTime, alarmInterval, updateAlarmInterval } = useStore()
   let [timeFormatted, setTimeFormatted] = useState({ h: time.h, m: time.m, s: time.s })
   let [alarmStatusMessage, setAlarmStatusMessage] = useState("")
-  let [minutesInterval, setMinutesInterval] = useState(15)
+  let [minutesInterval, setMinutesInterval] = useState(alarmInterval)
   let [nextAlarmMessage, setNextAlarmMessage] = useState("")
+  console.log(alarmInterval);
 
   // format time to transform from 9:17:0 to 09:17:00 only for visual purposes
   const formatTime = () => {
@@ -41,10 +42,17 @@ export const Alarm = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       updateTime()
+      updateAlarmInterval(minutesInterval)
     }, 1000);
 
     return () => clearInterval(intervalId);
   }, []);
+
+  // update variable alarmInterval from the Store 
+  const handleChangeMinutesIntervalBtn = (i) => {
+    setMinutesInterval(i)
+    updateAlarmInterval(i)
+  }
 
   // run these functions each time that `time` is updated
   useEffect(() => {
@@ -57,7 +65,7 @@ export const Alarm = () => {
     <div className="alarm">
       <div className="alarm-h-m-s">
         <span>{timeFormatted.h} : {timeFormatted.m} : {timeFormatted.s}</span>
-        <span>{alarmStatusMessage}</span>        
+        <span>{alarmStatusMessage}</span>
       </div>
       <div className="alarm-setted-interval-indicator">
         <span>The alarm will sound</span>
@@ -66,12 +74,12 @@ export const Alarm = () => {
       <div className="alarm-config">
         <details>
           <summary>Change interval</summary>
-          {[5, 10, 15, 20, 30, 60].map(i => <div key={i} onClick={() => setMinutesInterval(i)}>{i}</div>)}
+          {[5, 10, 15, 20, 30, 60].map(i => <div key={i} onClick={() => handleChangeMinutesIntervalBtn(i)}>{i}</div>)}
         </details>
       </div>
       <div className="alarm-next-time-indicator">
         <span>Next alarm will sound</span>
-        <span>at {timeFormatted.h} : {timeFormatted.m} : {nextAlarmMessage}</span>        
+        <span>at {timeFormatted.h} : {timeFormatted.m} : {nextAlarmMessage}</span>
       </div>
     </div>
   )
