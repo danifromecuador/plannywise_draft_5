@@ -15,7 +15,7 @@ const getTime = () => {
   }
 }
 
-export const useStore = create((set) => ({
+export const ztore = create((set) => ({
   time: getTime(),
   alarmInterval: 15,
   updateTime: () => set({ time: getTime() }),
