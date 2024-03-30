@@ -12,6 +12,8 @@ export const Alarm = () => {
   const [timeFormatted, setTimeFormatted] = useState({ h: time.h, m: time.m, s: time.s });
   const [alarmStatusMessage, setAlarmStatusMessage] = useState("");
   const [nextAlarmMessage, setNextAlarmMessage] = useState("");
+  const [showHide1, setShowHide1] = useState("")
+  const [showHide2, setShowHide2] = useState("hide")
 
   // update ztore time each second, other way the time will be static
   useEffect(() => {
@@ -48,6 +50,17 @@ export const Alarm = () => {
     nextAlarmWillSoundAt();
   }, [time, alarmInterval]);
 
+  const handleClick1 = () => {
+    showHide1 == "" ? setShowHide1("hide") : setShowHide1("")
+    setShowHide2("")
+  }
+
+  const handleClick2 = (i) => {
+    updateAlarmInterval(i)
+    setShowHide1("")
+    setShowHide2("hide")
+  }
+
   return (
     <div className="alarm">
       <div className="alarm-h-m-s">
@@ -55,19 +68,20 @@ export const Alarm = () => {
         <span>{alarmStatusMessage}</span>
       </div>
       <div className="alarm-setted-interval-indicator">
-        <span>The alarm will sound</span>
-        <span>each {alarmInterval} minutes</span>
-      </div>
-      <div className="alarm-config">
-        <details>
-          <summary>Change interval</summary>
-          {[5, 10, 15, 20, 30, 60].map(i => <div key={i} onClick={() => updateAlarmInterval(i)}>{i}</div>)}
-        </details>
+        <span>The alarm will sound </span>
+        <span>
+          every
+          <span className={`alarm-interval-show ${showHide1}`} onClick={handleClick1}>{alarmInterval}</span>
+          <span className={`alarm-interval-select ${showHide2}`}>
+            {[5, 10, 15, 20, 30, 60].map(i => <span key={i} className='alarm-interval-select-item' onClick={() => handleClick2(i)}>{i}</span>)}
+          </span>
+          minutes
+        </span>
       </div>
       <div className="alarm-next-time-indicator">
-        <span>Next alarm will sound</span>
-        <span>at {timeFormatted.h} : {timeFormatted.m} : {nextAlarmMessage}</span>
+        <span>Next alarm will sound at </span>
+        <span>{timeFormatted.h} : {timeFormatted.m} : {nextAlarmMessage}</span>
       </div>
-    </div>
+    </div >
   );
 };

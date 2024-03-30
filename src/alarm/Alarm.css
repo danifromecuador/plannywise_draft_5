@@ -4,12 +4,29 @@
   border-radius: 20px;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
 }
 
-.alarm-h-m-s,
-.alarm-setted-interval-indicator,
-.alarm-next-time-indicator {
-  display: flex;
-  flex-direction: column;
+.alarm-interval-show,
+.alarm-interval-select-item {
+  font-size: 1.5rem;
+  border: 1px solid white;
+  padding: 0 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 3px;
+}
+
+.alarm-interval-show.hide,
+.alarm-interval-select.hide {
+  display: none;
+}
+
+@media (width <= 950px) {
+  .alarm-h-m-s,
+  .alarm-setted-interval-indicator,
+  .alarm-next-time-indicator {
+    display: flex;
+    flex-direction: column;
+  }
 }
