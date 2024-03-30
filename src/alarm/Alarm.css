@@ -4,13 +4,12 @@
   border-radius: 20px;
   display: flex;
   justify-content: space-between;
-  align-items:baseline;
+  align-items: baseline;
 }
 
 .alarm-h-m-s,
 .alarm-setted-interval-indicator,
-.alarm-next-time-indicator
-{
+.alarm-next-time-indicator {
   display: flex;
   flex-direction: column;
 }
