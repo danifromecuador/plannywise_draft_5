@@ -11,7 +11,7 @@ import './Alarm.css'
 export const Alarm = () => {
   const { time, updateTime, alarmInterval, updateAlarmInterval } = ztore();
   const [timeFormatted, setTimeFormatted] = useState({ h: time.h, m: time.m, s: time.s });
-  const [alarmStatusMessage, setAlarmStatusMessage] = useState("");
+  const [alarmStatusMessage, setAlarmStatusMessage] = useState("wait");
   const [nextAlarmMessage, setNextAlarmMessage] = useState("");
   const [showHide1, setShowHide1] = useState("")
   const [showHide2, setShowHide2] = useState("hide")
@@ -35,18 +35,18 @@ export const Alarm = () => {
 
     const playAlarm = () => {
       const audio = new Audio(alarmSound)
-      if (time.s % alarmInterval === 0) {
-        audio.play()
-        setAlarmStatusMessage("playing")
+      if (time.m % alarmInterval === 0) {
+        if (time.s === 0) audio.play()
+        if (time.s >= 0 && time.s <=8) setAlarmStatusMessage("playing")
+        else setAlarmStatusMessage("wait")
       }
-      else setAlarmStatusMessage("wait")
     };
 
     // TODO check if it is working with 60 minutes
     // calculate newt time that the alarm will sound
     const nextAlarmWillSoundAt = () => {
-      const remainder = time.s % alarmInterval;
-      const nextMinute = time.s + (alarmInterval - remainder);
+      const remainder = time.m % alarmInterval;
+      const nextMinute = time.m + (alarmInterval - remainder);
       const nextAlarmMinute = nextMinute >= 60 ? 0 : nextMinute;
       setNextAlarmMessage(nextAlarmMinute.toString().padStart(2, '0'));
     };
@@ -70,6 +70,7 @@ export const Alarm = () => {
   return (
     <div className="alarm">
       <div className="alarm-h-m-s">
+        <span>Current Local Time</span>
         <span>{timeFormatted.h} : {timeFormatted.m} : {timeFormatted.s}</span>
       </div>
       <div className="alarm-setted-interval-indicator">
@@ -88,7 +89,7 @@ export const Alarm = () => {
           alarmStatusMessage === "wait" ?
             <>
               <span>Next alarm will sound at </span>
-              <span>{timeFormatted.h} : {timeFormatted.m} : {nextAlarmMessage}</span>
+              <span>{timeFormatted.h} : {nextAlarmMessage} : 00</span>
             </>
             :
             <div>Alarm is playing right now</div>
