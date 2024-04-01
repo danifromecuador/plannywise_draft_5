@@ -1,6 +1,7 @@
 // src/alarm/Alarm.jsx
 import { useState, useEffect } from 'react'
 import { ztore } from '../zustand/ztore'
+import alarmSound from '../../public/alarm.wav'
 import './Alarm.css'
 
 // time       is a variable type object from the store that shows the current local time
@@ -32,8 +33,13 @@ export const Alarm = () => {
       });
     };
 
-    const alarmWillSoundEach = () => {
-      time.s % alarmInterval === 0 ? setAlarmStatusMessage("playing") : setAlarmStatusMessage("wait");
+    const playAlarm = () => {
+      const audio = new Audio(alarmSound)
+      if (time.s % alarmInterval === 0) {
+        audio.play()
+        setAlarmStatusMessage("playing")
+      }
+      else setAlarmStatusMessage("wait")
     };
 
     // TODO check if it is working with 60 minutes
@@ -46,7 +52,7 @@ export const Alarm = () => {
     };
 
     formatTime();
-    alarmWillSoundEach();
+    playAlarm();
     nextAlarmWillSoundAt();
   }, [time, alarmInterval]);
 
@@ -65,7 +71,6 @@ export const Alarm = () => {
     <div className="alarm">
       <div className="alarm-h-m-s">
         <span>{timeFormatted.h} : {timeFormatted.m} : {timeFormatted.s}</span>
-        <span>{alarmStatusMessage}</span>
       </div>
       <div className="alarm-setted-interval-indicator">
         <span>The alarm will sound </span>
@@ -79,8 +84,15 @@ export const Alarm = () => {
         </span>
       </div>
       <div className="alarm-next-time-indicator">
-        <span>Next alarm will sound at </span>
-        <span>{timeFormatted.h} : {timeFormatted.m} : {nextAlarmMessage}</span>
+        {
+          alarmStatusMessage === "wait" ?
+            <>
+              <span>Next alarm will sound at </span>
+              <span>{timeFormatted.h} : {timeFormatted.m} : {nextAlarmMessage}</span>
+            </>
+            :
+            <div>Alarm is playing right now</div>
+        }
       </div>
     </div >
   );
