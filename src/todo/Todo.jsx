@@ -1,10 +1,10 @@
-import {ztore } from '../zustand/ztore.js'
+import { ztore } from '../zustand/ztore.js'
 
 export const Todo = () => {
-  const {alarmInterval} = ztore()
+  const { alarmInterval } = ztore()
   return (
     <div className="todo">
-      {alarmInterval}
+      TODO alarm interval : {alarmInterval.current}
     </div>
   )
 }
