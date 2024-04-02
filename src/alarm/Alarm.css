@@ -33,8 +33,7 @@
   cursor: pointer;
 }
 
-.alarm-interval-show.hide,
-.alarm-interval-select.hide {
+.hide {
   display: none;
 }
 

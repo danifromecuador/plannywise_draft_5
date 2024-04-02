@@ -6,8 +6,8 @@ export const getTime = () => {
     D: time.getDate(), // day of month
     d: time.getDay(), // day of week
     h: time.getHours(),
-    // m: time.getMinutes(),
-    m: 35,
+    m: time.getMinutes(),
+    // m: 40,
     s: time.getSeconds()
   }
 }
@@ -30,7 +30,7 @@ export const previousAlarmInterval = () => {
   // TODO calculate interval
 
   let maxHour = time.h
-  let minHour = 0
+  let minHour = maxHour
   let maxMinute = (Math.floor(time.m / interval)) * interval
   let minMinute = maxMinute - interval
   if (minMinute < 0) {
@@ -41,8 +41,8 @@ export const previousAlarmInterval = () => {
   }
 
   return {
-    min: { h: minHour, m: minMinute },
-    max: { h: maxHour, m: maxMinute }
+    min: { h: minHour.toString().padStart(2, '0'), m: minMinute.toString().padStart(2, '0') },
+    max: { h: maxHour.toString().padStart(2, '0'), m: maxMinute.toString().padStart(2, '0') }
   }
 
 }

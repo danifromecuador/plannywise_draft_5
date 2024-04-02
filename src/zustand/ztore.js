@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import {getTime, formatTime, previousAlarmInterval,updateZtore} from './logic.js'
+import {getTime, formatTime, previousAlarmInterval,updateZtore} from './alarm.js'
 
 export const ztore = create((set) => ({
   // set initial values
