@@ -7,14 +7,30 @@
   align-items: center;
 }
 
+.alarm-left, .alarm-center, .alarm-right {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.alarm-interval-select {
+  display: flex;
+  column-gap: 5px;  
+}
+
+.puto {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
 .alarm-interval-show,
 .alarm-interval-select-item {
-  font-size: 1.5rem;
   border: 1px solid white;
+  border-radius: 5px;
   padding: 0 5px;
-  border-radius: 10px;
+  font-size: 1.5rem;
   cursor: pointer;
-  margin: 3px;
 }
 
 .alarm-interval-show.hide,
@@ -22,11 +38,11 @@
   display: none;
 }
 
-@media (width <= 950px) {
-  .alarm-h-m-s,
-  .alarm-setted-interval-indicator,
-  .alarm-next-time-indicator {
-    display: flex;
+@media (width <= 1280px) {
+  .alarm-left,
+  .alarm-center,
+  .alarm-right {
     flex-direction: column;
+    align-items: flex-start;
   }
 }
