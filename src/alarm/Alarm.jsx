@@ -14,7 +14,7 @@ export const Alarm = () => {
   useEffect(() => {
     const intervalId = setInterval(updateZtore, 1000);
     return () => clearInterval(intervalId);
-  }, []);
+  }, [updateZtore]);
 
   // save ztore state in local storage when ztore state changes
   useEffect(() => { localStorage.setItem("currentAlarmInterval", JSON.stringify(currentAlarmInterval)) }, [currentAlarmInterval])
@@ -31,7 +31,7 @@ export const Alarm = () => {
       setNextAlarmWillSoundAtMessage("Next will sound at")
       setHide3("")
     }
-  }, [time])
+  }, [time, currentAlarmInterval])
 
   // show or hide div
   const handleClickAlarmIntervalShow = () => { hide1 === "" ? setHide1("hide") : setHide2("") }
