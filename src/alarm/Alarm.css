@@ -1,0 +1,55 @@
+.alarm {
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alarm-left,
+.alarm-center,
+.alarm-right {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.alarm-time-number {
+  font-size: 1.5rem;
+}
+
+.alarm-interval-select {
+  display: flex;
+  column-gap: 5px;
+}
+
+.alarm-interval-show-and-select {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.alarm-interval-show,
+.alarm-interval-select-item {
+  width: 40px;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 0 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.hide {
+  display: none;
+}
+
+@media (width <= 1280px) {
+  .alarm-left,
+  .alarm-center,
+  .alarm-right {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
