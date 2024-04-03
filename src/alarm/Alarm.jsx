@@ -34,7 +34,13 @@ export const Alarm = () => {
   }, [time, currentAlarmInterval])
 
   // show or hide div
-  const handleClickAlarmIntervalShow = () => { hide1 === "" ? setHide1("hide") : setHide2("") }
+  const handleClickAlarmIntervalShow = () => {
+    if (hide1 === "") {
+      setHide1("hide")
+      setHide2("")
+    }
+    else setHide1("")
+  }
 
   // show or hide div
   const handleClickAlarmIntervalSelect = (i) => {
