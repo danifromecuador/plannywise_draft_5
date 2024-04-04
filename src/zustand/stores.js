@@ -1,12 +1,13 @@
+// src/zustand/stores.js
 import { create } from 'zustand';
-import { getTime, formatTime, previousAlarmInterval, nextAlarm, updateZtore } from '../alarm/alarm_logic.js'
+import { getTime, formatTime, previousAlarmInterval, nextAlarm, updateAlarmStore } from '../alarm/alarm_logic.js'
 
-export const ztore = create((set) => ({
+export const alarmStore = create((set) => ({
   time: getTime(),
   timeFormatted: formatTime(),
   currentAlarmInterval: JSON.parse(localStorage.getItem("currentAlarmInterval")) || 15,
   previousAlarmInterval: previousAlarmInterval(),
   nextAlarm: nextAlarm(),
   updateCurrentAlarmInterval: (newCurrentAlarmInterval) => set({ currentAlarmInterval: newCurrentAlarmInterval }),
-  updateZtore: () => set(updateZtore())
+  updateAlarmStore: () => set(updateAlarmStore())
 }))

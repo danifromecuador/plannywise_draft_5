@@ -1,22 +1,23 @@
-import { ztore } from '../zustand/ztore.js';
+// src/alarm/Alarm.jsx
+import { alarmStore } from '../zustand/stores.js';
 import { useState, useEffect } from 'react';
 import alarmSound from '../../public/alarm.wav'
 import './Alarm.css'
 
 export const Alarm = () => {
-  const { time, timeFormatted, currentAlarmInterval, nextAlarm, updateCurrentAlarmInterval, updateZtore } = ztore();
+  const { time, timeFormatted, currentAlarmInterval, nextAlarm, updateCurrentAlarmInterval, updateAlarmStore } = alarmStore();
   const [nextAlarmWillSoundAtMessage, setNextAlarmWillSoundAtMessage] = useState("Next will sound at")
   const [hide1, setHide1] = useState("")
   const [hide2, setHide2] = useState("hide")
   const [hide3, setHide3] = useState("")
 
-  // refresh ztore every 1000 miliSeconds
+  // refresh alarmStore every 1000 miliSeconds
   useEffect(() => {
-    const intervalId = setInterval(updateZtore, 1000);
+    const intervalId = setInterval(updateAlarmStore, 1000);
     return () => clearInterval(intervalId);
-  }, [updateZtore]);
+  }, [updateAlarmStore]);
 
-  // save ztore state in local storage when ztore state changes
+  // save alarmStore state in local storage when alarmStore state changes
   useEffect(() => { localStorage.setItem("currentAlarmInterval", JSON.stringify(currentAlarmInterval)) }, [currentAlarmInterval])
 
   // verify if the alarm should be played each time that "time" is updated (each second)
