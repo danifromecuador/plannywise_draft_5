@@ -1,0 +1,11 @@
+.todo ul, .todo li {
+  list-style-type: none;
+}
+
+.todo .to-do {
+  background-color: red;
+}
+
+.todo .done {
+  background-color: green;
+}
