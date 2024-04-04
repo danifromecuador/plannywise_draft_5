@@ -1,11 +1,45 @@
-import { alarmStore } from '../zustand/stores.js'
+import { useState, useEffect } from 'react'
+import { todoStore } from '../zustand/stores.js'
 
 export const Todo = () => {
-  const { currentAlarmInterval, previousAlarmInterval } = alarmStore()
+  const { todos, dones, addTodo, markAsDone, updateTodoStore } = todoStore()
+  const [input, setInput] = useState("")
+  const handleInputChange = (e) => setInput(e.target.value)
+
+  const handleEnterKeyDown = (k) => {
+    if (k.key === "Enter" && input !== "") {
+      addTodo(input)
+      updateTodoStore()
+      setInput("")
+    }
+  }
+
+  useEffect(() => {
+
+  }, [])
+
+
+
   return (
     <div className="todo">
-      <div>current : {currentAlarmInterval}</div>
-      <div>previous : {previousAlarmInterval.min.h}:{previousAlarmInterval.min.m} ... {previousAlarmInterval.max.h}:{previousAlarmInterval.max.m}</div>      
+      <h1>Today's Goals</h1>
+      <ul>
+        {todos.map((e, i) => (
+          <li key={i}>{e.text}</li>
+        ))}
+        {dones.map((e, i) => (
+          <li key={i}>{e.text}</li>
+        ))}
+      </ul>
+      <div>
+        <input
+          type="text"
+          placeholder='Type a new goal and press enter'
+          value={input}
+          onChange={(e) => handleInputChange(e)}
+          onKeyDown={(k) => handleEnterKeyDown(k)}
+        />
+      </div>
     </div>
   )
 }
