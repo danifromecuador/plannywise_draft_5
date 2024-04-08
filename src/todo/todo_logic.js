@@ -1,5 +1,5 @@
 // following functions will be used by src/zustand/stores.js
-export const todos = [
+const todos = [
   {
     date: "1",
     text: "text to do 1"
@@ -10,7 +10,7 @@ export const todos = [
   }
 ]
 
-export const dones = [
+const dones = [
   {
     date: "3",
     text: "some text done 3"
@@ -23,19 +23,16 @@ export const dones = [
 
 const getDate = () => {
   const date = new Date()
-  const Y = date.getFullYear()
-  const M = date.getMonth()+1
-  const D = date.getDate()
-  const h = date.getHours()
-  const m = date.getMinutes()
-  const s = date.getSeconds()
-  const ms = date.getMilliseconds()
-  const index = [Y, M, D, h, m, s, ms]
-  let newIndex = ""
-  for (let i = 0; i< index.length; i++) {
-    newIndex += index[i].toString()
-  }
-  return newIndex
+  const index = [
+    date.getFullYear(),
+    date.getMonth() + 1,
+    date.getDate(),
+    date.getHours(),
+    date.getMinutes(),
+    date.getSeconds(),
+    date.getMilliseconds()
+  ]
+  return Number(index.join(""))
 }
 
 export const updateTodosLocalStorage = (todos) => {
@@ -45,8 +42,9 @@ export const updateTodosLocalStorage = (todos) => {
 }
 
 export const addTodo = (input) => {
-  const date = new Date()
+  const date = getDate()
   todos.push({ date: date, text: input })
+  console.log(todos);
 }
 
 export const markAsDone = () => {
