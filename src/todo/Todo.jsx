@@ -1,31 +1,31 @@
-import { useState } from 'react'
-import { todoStore } from '../zustand/stores.js'
+import { useState, useEffect } from 'react'
+import { TodoStore } from '../zustand/stores.js'
 import './Todo.css'
 
 export const Todo = () => {
-  const { todos, dones, addTodo, markAsDone, updateTodoStore, updateTodosLocalStorage } = todoStore()
+  const todoStore = TodoStore()
   const [input, setInput] = useState("")
 
   const handleInputChange = (e) => setInput(e.target.value)
 
-  const handleEnterKeyDown = (k) => {
-    if (k.key === "Enter" && input[0] !== " ") {
-      addTodo(input)
-      updateTodosLocalStorage()
+  const handleEnterKeyDown = (e) => {
+    if (e.key === "Enter" && input[0] !== " ") {
+      todoStore.addTodo(input)
       setInput("")
-
     }
   }
+
+
 
   return (
     <div className="todo">
       <h1>Today's Goals</h1>
       <ul>
-        {todos.map((e, i) => (
-          <li key={i} className='to-do'>{e.text}</li>
+        {todoStore.todos.map((todo) => (
+          <li key={todo.date} className='to-do' onClick={() => todoStore.markAsDone(todo.date)}>{todo.text}</li>
         ))}
-        {dones.map((e, i) => (
-          <li key={i} className='done'>{e.text}</li>
+        {todoStore.dones.map((todo) => (
+          <li key={todo.date} className='done' onClick={() => todoStore.markAsDone(todo.date)}>{todo.text}</li>
         ))}
       </ul>
       <div>
@@ -34,7 +34,7 @@ export const Todo = () => {
           placeholder="Type a goal and press Enter"
           value={input}
           onChange={(e) => handleInputChange(e)}
-          onKeyDown={(k) => handleEnterKeyDown(k)}
+          onKeyDown={(e) => handleEnterKeyDown(e)}
         />
       </div>
     </div>

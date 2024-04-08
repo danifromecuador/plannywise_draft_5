@@ -1,16 +1,7 @@
 // following functions will be used by src/zustand/stores.js
-const todos = [
-  {
-    date: "1",
-    text: "text to do 1"
-  },
-  {
-    date: "2",
-    text: "text to do 2"
-  }
-]
+export const todos = []
 
-const dones = [
+export const dones = [
   {
     date: "3",
     text: "some text done 3"
@@ -35,18 +26,11 @@ const getDate = () => {
   return Number(index.join(""))
 }
 
-export const updateTodosLocalStorage = (todos) => {
-  console.log("This is the data that will be saved in local storage");
-  console.log(todos);
-  console.log(getDate());
-}
-
 export const addTodo = (input) => {
   const date = getDate()
   todos.push({ date: date, text: input })
-  console.log(todos);
 }
 
-export const markAsDone = () => {
-  console.log("caramelo");
+export const markAsDone = (todo) => {
+  console.log(todo);
 }
