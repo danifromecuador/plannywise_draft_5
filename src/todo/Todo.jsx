@@ -3,7 +3,7 @@ import { todoStore } from '../zustand/stores.js'
 import './Todo.css'
 
 export const Todo = () => {
-  const { todos, dones, addTodo, markAsDone, updateTodoStore } = todoStore()
+  const { todos, dones, addTodo, markAsDone, updateTodoStore, updateTodosLocalStorage } = todoStore()
   const [input, setInput] = useState("")
 
   const handleInputChange = (e) => setInput(e.target.value)
@@ -11,8 +11,10 @@ export const Todo = () => {
   const handleEnterKeyDown = (k) => {
     if (k.key === "Enter" && input[0] !== " ") {
       addTodo(input)
+      updateTodosLocalStorage()
       setInput("")
-    }    
+
+    }
   }
 
   return (
