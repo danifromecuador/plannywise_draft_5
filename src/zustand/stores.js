@@ -17,5 +17,5 @@ export const TodoStore = create((set) => ({
   todos: JSON.parse(localStorage.getItem("todos")) || [],
   dones: [],
   addTodo: (input) => addTodo(set, input),
-  markAsDone: (todo) => markAsDone(todo)
+  markAsDone: (todo) => markAsDone(set, todo)
 }))
