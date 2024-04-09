@@ -63,3 +63,7 @@
   background-color: black;
   color: white;
 }
+
+.todo ul .hide {
+  display: none;
+}
