@@ -1,17 +1,5 @@
 // following functions will be used by src/zustand/stores.js
-export const todos = []
-
-export const dones = [
-  {
-    date: "3",
-    text: "some text done 3"
-  },
-  {
-    date: "4",
-    text: "some text done 4"
-  }
-]
-
+import { TodoStore } from "../zustand/stores"
 const getDate = () => {
   const date = new Date()
   const index = [
@@ -25,3 +13,14 @@ const getDate = () => {
   ]
   return Number(index.join(""))
 }
+
+export const addTodo = (set, input) => {
+  TodoStore.getState
+  set({ todos: [...TodoStore.getState().todos, { index: getDate(), text: input }] })
+}
+
+export const markAsDone = (todo) => {
+console.log(todo);
+}
+
+
