@@ -21,6 +21,12 @@ export const addTodo = (set, input) => {
 }
 
 export const markAsDone = (set, todo) => {
+  let dones = TodoStore.getState().dones
+  dones.push(todo)
+  set({ dones })
+
+
+
   const todos = TodoStore.getState().todos.filter(t => t.index !== todo.index);
   set({ todos });
 }
