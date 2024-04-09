@@ -2,6 +2,7 @@
 import { create } from 'zustand';
 import { getTime, formatTime, previousAlarmInterval, nextAlarm, updateAlarmStore } from '../alarm/alarm_logic.js'
 import { addTodo, markAsDone, unMarkAsDone } from '../todo/todo_logic.js'
+import { addTask } from '../task/task_logic.js';
 
 export const alarmStore = create((set) => ({
   time: getTime(),
@@ -22,7 +23,8 @@ export const TodoStore = create((set) => ({
   deleteAllDones: () => set({ dones: [] })
 }))
 
-export const TaskStore = create(()=>({
-  tasks: [{date:123, text:"first task"}, {date:234, text:"second task"}],
+export const TaskStore = create((set) => ({
+  tasks: [],
+  addTask: (interval, input) => addTask(set, interval, input),
   workedHours: 7.25,
 }))

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { alarmStore } from '../zustand/stores.js'
 import { TaskStore } from '../zustand/stores.js'
 import './Task.css'
@@ -5,6 +6,22 @@ import './Task.css'
 export const Task = () => {
   const taskStore = TaskStore()
   const AlarmStore = alarmStore()
+  const [input, setInput] = useState("")
+
+  const handleEnter = (e) => {
+    if (e.key === "Enter" && input[0] !== "") {
+      const interval = {
+        minH: AlarmStore.previousAlarmInterval.min.h,
+        minM: AlarmStore.previousAlarmInterval.min.m,
+        maxH: AlarmStore.previousAlarmInterval.max.h,
+        maxM: AlarmStore.previousAlarmInterval.max.m
+      }
+      taskStore.addTask(interval, input)
+      setInput("")
+    }
+  }
+
+
   return (
     <div className="tasks">
       <h1>Task Tracker</h1>
@@ -15,8 +32,8 @@ export const Task = () => {
         </span>
       </div>
       <ul className={taskStore.tasks.length === 0 ? "hide" : ""}>
-        {taskStore.tasks.map((task) => (
-          <li key={task.date} className='task'>{task.text}</li>
+        {taskStore.tasks.map((t) => (
+          <li key={t.interval} className='task'>{t.interval.minH} : {t.interval.minM} - {t.interval.maxH} : {t.interval.maxM}...{t.text}</li>
         ))}
       </ul>
       <div className='input-and-button'>
@@ -30,6 +47,9 @@ export const Task = () => {
           <input
             type="text"
             placeholder="Type a completed task and press Enter"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => handleEnter(e)}
           />
         </div>
       </div>
