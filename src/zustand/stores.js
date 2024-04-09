@@ -23,5 +23,6 @@ export const TodoStore = create((set) => ({
 }))
 
 export const TaskStore = create(()=>({
-  tasks: 25
+  tasks: [{date:123, text:"first task"}, {date:234, text:"second task"}],
+  workedHours: 7.25,
 }))
