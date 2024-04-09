@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { alarmStore } from '../zustand/stores.js'
 import { TaskStore } from '../zustand/stores.js'
 import './Task.css'
@@ -20,6 +20,10 @@ export const Task = () => {
       setInput("")
     }
   }
+
+  useEffect(()=>{
+    localStorage.setItem("tasks", JSON.stringify(taskStore.tasks))
+  }, [taskStore])
 
 
   return (

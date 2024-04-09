@@ -2,7 +2,9 @@ import { TaskStore } from "../zustand/stores"
 
 const taskWasCompleted = (interval) => {
   let previousInterval = TaskStore.getState().tasks.length > 0 ? TaskStore.getState().tasks[TaskStore.getState().tasks.length - 1].interval : "none"
-  return previousInterval.toString() === interval.toString()
+  console.log([JSON.stringify(previousInterval), JSON.stringify(interval)])
+  console.log(JSON.stringify(previousInterval) === JSON.stringify(interval))
+  return JSON.stringify(previousInterval) === JSON.stringify(interval)
 }
 
 export const addTask = (set, interval, input) => {
