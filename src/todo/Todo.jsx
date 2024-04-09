@@ -15,6 +15,11 @@ export const Todo = () => {
     }
   }
 
+  useEffect(()=>{
+    localStorage.setItem("todos", JSON.stringify(todoStore.todos))
+    localStorage.setItem("dones", JSON.stringify(todoStore.dones))
+  },[todoStore])
+
 
 
   return (
@@ -22,10 +27,10 @@ export const Todo = () => {
       <h1>Today's Goals</h1>
       <ul>
         {todoStore.todos.map((todo) => (
-          <li key={todo.date} className='to-do' onClick={() => todoStore.markAsDone(todo.date)}>{todo.text}</li>
+          <li key={todo.index} className='to-do' onClick={() => todoStore.markAsDone(todo.index)}>{todo.index}...{todo.text}</li>
         ))}
         {todoStore.dones.map((todo) => (
-          <li key={todo.date} className='done' onClick={() => todoStore.markAsDone(todo.date)}>{todo.text}</li>
+          <li key={todo.index} className='done' onClick={() => todoStore.markAsDone(todo.index)}>{todo.index}...{todo.text}</li>
         ))}
       </ul>
       <div>

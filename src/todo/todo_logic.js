@@ -25,12 +25,3 @@ const getDate = () => {
   ]
   return Number(index.join(""))
 }
-
-export const addTodo = (input) => {
-  const date = getDate()
-  todos.push({ date: date, text: input })
-}
-
-export const markAsDone = (todo) => {
-  console.log(todo);
-}
