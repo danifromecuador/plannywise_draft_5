@@ -23,7 +23,7 @@ export const Todo = () => {
   return (
     <div className="todo">
       <h1>Daily Goals</h1>
-      <ul>
+      <ul className={todoStore.todos.length === 0 && todoStore.dones.length === 0 ? "hide" : ""}>
         {todoStore.todos.map((todo) => (
           <li key={todo.index} className='to-do' onClick={() => todoStore.markAsDone(todo)}>{todo.text}</li>
         ))}
