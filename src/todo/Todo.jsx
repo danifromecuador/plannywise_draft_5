@@ -31,7 +31,8 @@ export const Todo = () => {
           <li key={todo.index} className='done' onClick={() => todoStore.unMarkAsDone(todo)}>{todo.text}</li>
         ))}
       </ul>
-      <div>
+      <div className='input-and-button'>
+        <button onClick={todoStore.deleteAllDones}>Delete All Completed</button>
         <input
           type="text"
           placeholder="Type a goal and press Enter"
@@ -40,7 +41,6 @@ export const Todo = () => {
           onKeyDown={(e) => handleEnterKeyDown(e)}
         />
       </div>
-      <button onClick={todoStore.deleteAllDones}>Delete All Completed</button>
     </div>
   )
 }
