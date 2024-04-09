@@ -5,7 +5,7 @@ import './styles/App.css'
 export const App = () => {
   return (
     <div className='app'>
-      <Alarm />
+      <Alarm />      
       <Todo />
     </div>
   )

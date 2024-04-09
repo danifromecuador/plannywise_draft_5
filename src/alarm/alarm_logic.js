@@ -1,4 +1,6 @@
-// following functions will be exported to ztore
+// src/alarm/alarm_logic.js
+// following functions will be exported to stores file
+// src/zustand/stores.js
 // gets the local time that will be used for math operations
 export const getTime = () => ({
   y: new Date().getFullYear(),
@@ -54,7 +56,7 @@ export const nextAlarm = () => {
 }
 
 // update some states (time, timeFormatted, previousAlarmInterval, nextAlarm) of updateZtore
-export const updateZtore = () => ({
+export const updateAlarmStore = () => ({
   time: getTime(),
   timeFormatted: formatTime(),
   previousAlarmInterval: previousAlarmInterval(),

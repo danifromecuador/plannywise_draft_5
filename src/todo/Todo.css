@@ -1,0 +1,65 @@
+.todo {
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.todo h1 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.todo ul {
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+
+.todo ul,
+.todo li {
+  list-style-type: none;
+}
+
+.todo .done {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.todo li {
+  padding: 5px;
+}
+
+.todo li:hover {
+  cursor: pointer;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 4px;
+}
+
+.input-and-button {
+  display: flex;
+  column-gap: 10px;
+}
+
+.todo button {
+  width: 200px;
+  background-color: transparent;
+  color: white;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.todo input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  outline: none;
+  background-color: black;
+  color: white;
+}

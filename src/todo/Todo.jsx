@@ -1,11 +1,46 @@
-import { ztore } from '../zustand/ztore.js'
+import { useState, useEffect } from 'react'
+import { TodoStore } from '../zustand/stores.js'
+import './Todo.css'
 
 export const Todo = () => {
-  const { currentAlarmInterval, previousAlarmInterval } = ztore()
+  const todoStore = TodoStore()
+  const [input, setInput] = useState("")
+
+  const handleInputChange = (e) => setInput(e.target.value)
+
+  const handleEnterKeyDown = (e) => {
+    if (e.key === "Enter" && input[0] !== " ") {
+      todoStore.addTodo(input)
+      setInput("")
+    }
+  }
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todoStore.todos))
+    localStorage.setItem("dones", JSON.stringify(todoStore.dones))
+  }, [todoStore])
+
   return (
     <div className="todo">
-      <div>current : {currentAlarmInterval}</div>
-      <div>previous : {previousAlarmInterval.min.h}:{previousAlarmInterval.min.m} ... {previousAlarmInterval.max.h}:{previousAlarmInterval.max.m}</div>      
+      <h1>Daily Goals</h1>
+      <ul>
+        {todoStore.todos.map((todo) => (
+          <li key={todo.index} className='to-do' onClick={() => todoStore.markAsDone(todo)}>{todo.text}</li>
+        ))}
+        {todoStore.dones.map((todo) => (
+          <li key={todo.index} className='done' onClick={() => todoStore.unMarkAsDone(todo)}>{todo.text}</li>
+        ))}
+      </ul>
+      <div className='input-and-button'>
+        <button onClick={todoStore.deleteAllDones}>Delete All Completed</button>
+        <input
+          type="text"
+          placeholder="Type a goal and press Enter"
+          value={input}
+          onChange={(e) => handleInputChange(e)}
+          onKeyDown={(e) => handleEnterKeyDown(e)}
+        />
+      </div>
     </div>
   )
 }
