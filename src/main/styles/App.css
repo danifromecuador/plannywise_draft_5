@@ -1,4 +1,7 @@
 .app {
   width: 95vw;
   height: 95vh;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
 }
