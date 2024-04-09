@@ -17,27 +17,37 @@ const getDate = () => {
 export const addTodo = (set, input) => {
   let todos = TodoStore.getState().todos
   todos.push({ index: getDate(), text: input })
-  set({ todos })
+  let sortTodos = sortList(todos)
+  set({ todos: sortTodos })
 }
 
 export const markAsDone = (set, todo) => {
   // add todo to dones list
   let dones = TodoStore.getState().dones
   dones.push(todo)
-  set({ dones })
+  let sortDones = sortList(dones)
+  set({ dones: sortDones })
+
   // delete todo from todos list
   const todos = TodoStore.getState().todos.filter(t => t.index !== todo.index)
-  set({ todos });
+  let sortTodos = sortList(todos)
+  set({ todos: sortTodos });
 }
 
 export const unMarkAsDone = (set, todo) => {
   // add todo to todos list
   let todos = TodoStore.getState().todos
   todos.push(todo)
-  set({ todos })
+  let sortTodos = sortList(todos)
+  set({ todos: sortTodos })
 
   // delete todo from dones list
   const dones = TodoStore.getState().dones.filter(d => d.index !== todo.index)
-  set({ dones })
+  let sortDones = sortList(dones)
+  set({ dones: sortDones })
 }
 
+const sortList = (list) => {
+  list.sort((a, b) => a.index - b.index)
+  return list
+}
