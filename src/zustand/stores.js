@@ -21,3 +21,7 @@ export const TodoStore = create((set) => ({
   unMarkAsDone: (todo) => unMarkAsDone(set, todo),
   deleteAllDones: () => set({ dones: [] })
 }))
+
+export const TaskStore = create(()=>({
+  tasks: 25
+}))
