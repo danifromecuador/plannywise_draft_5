@@ -12,7 +12,7 @@ export const alarmStore = create((set) => ({
   updateCurrentAlarmInterval: (newCurrentAlarmInterval) => set({ currentAlarmInterval: newCurrentAlarmInterval }),
   updateAlarmStore: () => set(updateAlarmStore())
 }))
-////////////////////////////////////////////////////////////////////
+
 export const TodoStore = create((set) => ({
   todos: JSON.parse(localStorage.getItem("todos")) || [],
   dones: JSON.parse(localStorage.getItem("dones")) || [],
