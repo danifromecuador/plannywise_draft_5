@@ -20,8 +20,6 @@ export const Todo = () => {
     localStorage.setItem("dones", JSON.stringify(todoStore.dones))
   }, [todoStore])
 
-
-
   return (
     <div className="todo">
       <h1>Daily Goals</h1>
@@ -42,6 +40,7 @@ export const Todo = () => {
           onKeyDown={(e) => handleEnterKeyDown(e)}
         />
       </div>
+      <button onClick={todoStore.deleteAllDones}>Delete All Completed</button>
     </div>
   )
 }
