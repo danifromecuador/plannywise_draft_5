@@ -14,16 +14,14 @@ const getDate = () => {
   return Number(index.join(""))
 }
 
-export const addTodo = (set, input) => set({ todos: [...TodoStore.getState().todos, { index: getDate(), text: input }] })
-
-export const markAsDone = (set, todo) => {
+export const addTodo = (set, input) => {
   let todos = TodoStore.getState().todos
-  for (let i = 0; i < todos.length; i++) {
-    if (todo.index === todos[i].index) {
-      todos.splice(i, 1)
-    }
-  }
+  todos.push({ index: getDate(), text: input })
   set({ todos })
 }
 
+export const markAsDone = (set, todo) => {
+  const todos = TodoStore.getState().todos.filter(t => t.index !== todo.index);
+  set({ todos });
+}
 
