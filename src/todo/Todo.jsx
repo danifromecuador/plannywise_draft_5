@@ -15,10 +15,10 @@ export const Todo = () => {
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todoStore.todos))
     localStorage.setItem("dones", JSON.stringify(todoStore.dones))
-  },[todoStore])
+  }, [todoStore])
 
 
 
@@ -30,7 +30,7 @@ export const Todo = () => {
           <li key={todo.index} className='to-do' onClick={() => todoStore.markAsDone(todo)}>{todo.index}...{todo.text}</li>
         ))}
         {todoStore.dones.map((todo) => (
-          <li key={todo.index} className='done' onClick={() => todoStore.markAsDone(todo)}>{todo.index}...{todo.text}</li>
+          <li key={todo.index} className='done' onClick={() => todoStore.unMarkAsDone(todo)}>{todo.index}...{todo.text}</li>
         ))}
       </ul>
       <div>

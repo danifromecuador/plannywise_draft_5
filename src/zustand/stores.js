@@ -1,7 +1,7 @@
 // src/zustand/stores.js
 import { create } from 'zustand';
 import { getTime, formatTime, previousAlarmInterval, nextAlarm, updateAlarmStore } from '../alarm/alarm_logic.js'
-import { addTodo, markAsDone } from '../todo/todo_logic.js'
+import { addTodo, markAsDone, unMarkAsDone } from '../todo/todo_logic.js'
 
 export const alarmStore = create((set) => ({
   time: getTime(),
@@ -15,7 +15,8 @@ export const alarmStore = create((set) => ({
 ////////////////////////////////////////////////////////////////////
 export const TodoStore = create((set) => ({
   todos: JSON.parse(localStorage.getItem("todos")) || [],
-  dones: [],
+  dones: JSON.parse(localStorage.getItem("dones")) || [],
   addTodo: (input) => addTodo(set, input),
-  markAsDone: (todo) => markAsDone(set, todo)
+  markAsDone: (todo) => markAsDone(set, todo),
+  unMarkAsDone: (todo) => unMarkAsDone(set, todo)
 }))

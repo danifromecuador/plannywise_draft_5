@@ -21,13 +21,23 @@ export const addTodo = (set, input) => {
 }
 
 export const markAsDone = (set, todo) => {
+  // add todo to dones list
   let dones = TodoStore.getState().dones
   dones.push(todo)
   set({ dones })
-
-
-
-  const todos = TodoStore.getState().todos.filter(t => t.index !== todo.index);
+  // delete todo from todos list
+  const todos = TodoStore.getState().todos.filter(t => t.index !== todo.index)
   set({ todos });
+}
+
+export const unMarkAsDone = (set, todo) => {
+  // add todo to todos list
+  let todos = TodoStore.getState().todos
+  todos.push(todo)
+  set({ todos })
+
+  // delete todo from dones list
+  const dones = TodoStore.getState().dones.filter(d => d.index !== todo.index)
+  set({ dones })
 }
 
